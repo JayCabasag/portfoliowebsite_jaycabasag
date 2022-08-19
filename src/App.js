@@ -1,23 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useRef } from "react";
+import About from "./components/About";
+import Home from "./components/Home";
+import Works from "./components/Works";
+import { scroller } from "react-scroll";
 
 function App() {
+
+  const [selectedSection, setSelectedSection] = useState('Home')
+
+  const moveToHome = () => {
+    setSelectedSection('Home'); 
+                   
+    scroller.scrollTo("home-container", {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+      });                                   
+  }
+
+  const moveToWorks = () => {
+    setSelectedSection('Works'); 
+                   
+    scroller.scrollTo("works-container", {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+      });                                   
+  }
+
+  const moveToAbout = () => {
+    setSelectedSection('About'); 
+                   
+    scroller.scrollTo("about-container", {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+      });                                   
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className="main-container">
+          
+            <nav className='home-navbar'>
+                <p></p>
+
+                <ul>
+                    <li className={selectedSection === 'Home'? 'active' : null} onClick={() => {moveToHome()}}>Home</li>
+                    <li className={selectedSection === 'Works'? 'active' : null} onClick={() => {moveToWorks()}}>Works</li>
+                    <li className={selectedSection === 'About'? 'active' : null} onClick={() => {moveToAbout()}}>About</li>
+                </ul>
+            </nav>
+
+            <Home />
+            <Works />
+            <About />
+        </div>
     </div>
   );
 }
